@@ -10,9 +10,8 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <x-nav-link :active="request()->is('/')" href="/">Home</x-nav-link>
-                        <x-nav-link :active="request()->is('about')" href="/about">About</x-nav-link>
+                        <x-nav-link :active="request()->is('weather')" href="/weather">Weather</x-nav-link>
                         <x-nav-link :active="request()->is('notes')" href="/notes">Notes</x-nav-link>
-                        <x-nav-link :active="request()->is('contact')" href="/contact">Contact</x-nav-link>
                     </div>
                 </div>
             </div>
@@ -52,9 +51,8 @@
         <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
 
             <x-nav-link :mobile="true" :active="request()->is('/')" href="/">Home</x-nav-link>
-            <x-nav-link :mobile="true" :active="request()->is('about')" href="/about">About</x-nav-link>
+            <x-nav-link :mobile="true" :active="request()->is('weather')" href="/weather">Weather</x-nav-link>
             <x-nav-link :mobile="true" :active="request()->is('notes')" href="/notes">Notes</x-nav-link>
-            <x-nav-link :mobile="true" :active="request()->is('contact')" href="/contact">Contact</x-nav-link>
 
             @auth
                 <form method="POST" action="{{ route('logout') }}">
