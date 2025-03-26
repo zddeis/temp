@@ -3,6 +3,7 @@
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\WeatherController;
 use App\Models\Note;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,7 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/weather', function () {
-    return view('weather');
-})->name('weather');
+Route::get('/weather', [WeatherController::class, 'index'])->name('weather');
 
 // Notes
 Route::middleware('auth')->group(function () {
