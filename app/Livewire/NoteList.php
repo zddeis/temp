@@ -23,14 +23,14 @@ class NoteList extends Component
         if (Auth::user()->type == 2) {
             $this->notes = Note::join('users', 'notes.user_id', '=', 'users.id') // Admin
                 ->select('notes.*', 'users.name as author_name')
-                ->orderBy('is_pinned', 'desc')
+                // ->orderBy('is_pinned', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->get();
         } else {
             $this->notes = Note::where('user_id', Auth::id())
                 ->join('users', 'notes.user_id', '=', 'users.id') // Regular
                 ->select('notes.*', 'users.name as author_name')
-                ->orderBy('is_pinned', 'desc')
+                // ->orderBy('is_pinned', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->get();
         }

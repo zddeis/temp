@@ -31,7 +31,7 @@
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
-
+                                
                                 @if($note->user_id == Auth::id())
                                     <a href="/note/edit?id={{ $note->id }}" class="text-sm text-gray-600 hover:text-indigo-600"
                                         wire:click.stop>
