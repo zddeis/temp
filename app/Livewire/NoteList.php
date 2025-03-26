@@ -9,6 +9,9 @@ use Livewire\Component;
 class NoteList extends Component
 {
     public $notes;
+    public $expandedNotes = [];
+    public $showDeleteModal = false;
+    public $noteToDelete = null;
 
     public function mount()
     {
@@ -33,6 +36,15 @@ class NoteList extends Component
         }
     }
 
+    public function toggleNote($noteId)
+    {
+        if (in_array($noteId, $this->expandedNotes)) {
+            $this->expandedNotes = array_diff($this->expandedNotes, [$noteId]);
+        } else {
+            $this->expandedNotes[] = $noteId;
+        }
+    }
+
     public function togglePin($noteId)
     {
         $note = Note::findOrFail($noteId);
@@ -45,6 +57,18 @@ class NoteList extends Component
         }
     }
 
+    public function confirmDelete($noteId)
+    {
+        $this->noteToDelete = $noteId;
+        $this->showDeleteModal = true;
+    }
+
+    public function cancelDelete()
+    {
+        $this->noteToDelete = null;
+        $this->showDeleteModal = false;
+    }
+
     public function deleteNote($noteId)
     {
         $note = Note::findOrFail($noteId);
@@ -53,6 +77,9 @@ class NoteList extends Component
             $note->delete();
             $this->loadNotes();
         }
+
+        $this->showDeleteModal = false;
+        $this->noteToDelete = null;
     }
 
     public function render()

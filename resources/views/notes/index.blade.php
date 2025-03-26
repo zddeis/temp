@@ -14,14 +14,4 @@
             @livewire('note-list')
         </div>
     </div>
-
-    <script>
-        function toggleNote(id) {
-            const bodyElement = document.getElementById(`note-body-${id}`);
-            const arrowElement = document.getElementById(`arrow-${id}`);
-
-            bodyElement.classList.toggle('hidden');
-            arrowElement.style.transform = bodyElement.classList.contains('hidden') ? '' : 'rotate(180deg)';
-        }
-    </script>
 </x-layout>

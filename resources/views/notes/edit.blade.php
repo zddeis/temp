@@ -1,5 +1,4 @@
 <x-layout>
-    
     <x-slot:heading>
         Edit note
     </x-slot:heading>
@@ -56,55 +55,22 @@
             </div>
 
             <div class="bg-gray-50 px-4 py-3 text-right sm:px-6 flex gap-x-4 justify-end items-center">
-                
-                <button type="button" onclick="confirmDelete()" class="text-red-500">Delete</button>
+                <button type="submit" form="destroy" 
+                        class="text-red-500"
+                        onclick="return confirm('Are you sure you want to delete this note? This action cannot be undone.')">
+                    Delete
+                </button>
 
                 <a href="/notes"
                     class="inline-flex justify-center rounded-md border border-transparent bg-gray-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                     Cancel
                 </a>
 
-                <button type="button" onclick="document.getElementById('update').submit()"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <button type="submit"
+                    class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Update
                 </button>
             </div>
         </form>
-
-        <!-- Delete Confirmation Modal -->
-        <div id="deleteModal" 
-             class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
-            <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Delete Note</h3>
-                <p class="text-gray-500 mb-6">Are you sure you want to delete this note? This action cannot be undone.</p>
-                <div class="flex justify-end space-x-4">
-                    <button onclick="closeDeleteModal()"
-                            class="px-4 py-2 text-gray-500 hover:text-gray-700">
-                        Cancel
-                    </button>
-                    <button onclick="document.getElementById('destroy').submit()"
-                            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                        Delete
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <script>
-        function confirmDelete() {
-            document.getElementById('deleteModal').classList.remove('hidden');
-        }
-
-        function closeDeleteModal() {
-            document.getElementById('deleteModal').classList.add('hidden');
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('deleteModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeDeleteModal();
-            }
-        });
-    </script>
 </x-layout>
