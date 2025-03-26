@@ -21,14 +21,14 @@ class NoteList extends Component
     public function loadNotes()
     {
         if (Auth::user()->type == 2) {
-            $this->notes = Note::join('users', 'notes.user_id', '=', 'users.id')
+            $this->notes = Note::join('users', 'notes.user_id', '=', 'users.id') // Admin
                 ->select('notes.*', 'users.name as author_name')
                 ->orderBy('is_pinned', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->get();
         } else {
             $this->notes = Note::where('user_id', Auth::id())
-                ->join('users', 'notes.user_id', '=', 'users.id')
+                ->join('users', 'notes.user_id', '=', 'users.id') // Regular
                 ->select('notes.*', 'users.name as author_name')
                 ->orderBy('is_pinned', 'desc')
                 ->orderBy('created_at', 'desc')
@@ -48,11 +48,11 @@ class NoteList extends Component
     public function togglePin($noteId)
     {
         $note = Note::findOrFail($noteId);
-        
+
         if ($note->user_id === Auth::id()) {
             $note->is_pinned = !$note->is_pinned;
             $note->save();
-            
+
             $this->loadNotes();
         }
     }
@@ -72,7 +72,7 @@ class NoteList extends Component
     public function deleteNote($noteId)
     {
         $note = Note::findOrFail($noteId);
-        
+
         if ($note->user_id === Auth::id() || Auth::user()->type == 2) {
             $note->delete();
             $this->loadNotes();
