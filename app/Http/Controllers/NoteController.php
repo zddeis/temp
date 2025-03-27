@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\WeatherService;
 
 class NoteController extends Controller
 {
@@ -46,11 +47,16 @@ class NoteController extends Controller
             'body' => ['required', 'string'],
         ]);
 
+        $weatherService = app(WeatherService::class);
+        $location = $request->query('location', 'Coimbra, Portugal');
+        $weather = $weatherService->getCurrentWeather($location);
+
         $note = new Note();
         $note->title = $validated['title'];
         $note->body = $validated['body'];
         $note->is_pinned = $request->has('is_pinned');
         $note->user_id = Auth::id();
+        $note->condition = $weatherService->extractIconName($weather["current"]["condition"]["icon"]);
         $note->save();
 
         return redirect('/notes');

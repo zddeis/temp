@@ -10,17 +10,27 @@
                 <div class="space-y-4">
                     <?php    foreach ($pinnedNotes as $note): ?>
                     <div class="bg-white shadow rounded-lg overflow-hidden">
-                        <div class="p-4">
-                            <div class="flex items-center justify-between mb-2">
-                                <h3 class="text-lg font-medium text-gray-900"><?= htmlspecialchars($note["title"]) ?>
+                        <div class="p-4 flex justify-between">
+                            <div class="mb-2">
+                                <h3 class="text-lg font-medium text-gray-900">
+                                    <?= htmlspecialchars($note["title"]) ?>
+                                    <span class="ml-1 text-sm text-gray-500">by
+                                        <?= htmlspecialchars($note["author_name"]) ?></span>
                                 </h3>
-                                <span class="text-sm text-gray-500">by
-                                    <?= htmlspecialchars($note["author_name"]) ?></span>
+                                <p class="ml-4 text-gray-600"><?= htmlspecialchars($note["body"]) ?></p>
                             </div>
-                            <p class="text-gray-600"><?= htmlspecialchars($note["body"]) ?></p>
+
+                            <div class="">
+                                <img src="https://cdn.weatherapi.com/weather/64x64/{{ $note->condition }}.png"
+                                        class="ml-auto w-16 h-16">
+                                        
+                                <p class="text-sm text-gray-500">                                        
+                                    Created: {{ date('M j, Y', strtotime($note->created_at)) }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <?php endforeach; ?>
+                    <?php    endforeach; ?>
 
                     @if(count($pinnedNotes) == 0)
                         <p class="ml-4 text-gray-500">No pinned notes at the moment.</p>

@@ -15,13 +15,13 @@
                                 @endif
 
                                 <div>
-                                    <h3 class="text-lg font-medium text-gray-900">
-                                        {{ $note->title }}
+                                    <h3 class="text-lg font-medium text-gray-900 flex gap-2">
+                                        {{ $note->title }} <img src="https://cdn.weatherapi.com/weather/64x64/{{ $note->condition }}.png" class="w-8 h-8">
                                     </h3>
                                     @if(Auth::user()->type == 2)
                                         <p class="text-sm text-gray-500">by {{ $note->author_name }}</p>
                                     @endif
-                                    <p class="text-sm text-gray-500">
+                                    <p class="text-sm text-gray-500">                                        
                                         Created: {{ date('M j, Y', strtotime($note->created_at)) }}
                                     </p>
                                 </div>

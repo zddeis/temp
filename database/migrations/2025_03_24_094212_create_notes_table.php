@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->text('body');
             $table->foreignIdFor(\App\Models\User::class, "user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('is_pinned')->default(false);
+            $table->string("condition")->default("day/116");
             $table->timestamps();
 
             $table->index('is_pinned');

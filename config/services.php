@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'weatherapi' => [
+        'key' => env('WEATHERAPI_KEY', 'f66876eb00244fcc82d145809252603'),
+    ],
+
 ];
