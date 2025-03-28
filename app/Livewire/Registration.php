@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
-class RegistrationController extends Controller
+class Registration extends Component
 {
-    public function create()
-    {
-        return view('registration.create');
-    }
+    public $name = '';
+    public $email = '';
+    public $password = '';
 
-    public function store(Request $request)
+    public function register()
     {
-        $validated = $request->validate([
+        $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', Password::defaults()]
@@ -33,5 +32,10 @@ class RegistrationController extends Controller
         Auth::login($user);
 
         return redirect('/notes');
+    }
+
+    public function render()
+    {
+        return view('livewire.registration')->layout('Components.layout');
     }
 }
